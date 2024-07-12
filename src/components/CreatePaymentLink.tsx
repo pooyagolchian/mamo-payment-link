@@ -8,6 +8,9 @@ const CreatePaymentLink = () => {
         let data = JSON.stringify({
             "title": "Chocolate Box - Small",
             "description": "12pcs Chocolate Box",
+            first_name: "Pooya",
+            last_name: "Golchian",
+            "email": "pooya.golchian@gmail.com",
             "capacity": 1,
             "active": true,
             "return_url": "https://myawesomewebsite.com/paymentSuccess",
@@ -32,7 +35,7 @@ const CreatePaymentLink = () => {
             maxBodyLength: Infinity,
             url: 'http://localhost:8010/proxy/manage_api/v1/links',
             headers: {
-                'Authorization': 'Bearer sk-a83af377-2fd5-4991-8202-e74801df8d98',
+                'Authorization': `Bearer ${process.env.REACT_APP_MAMO_CREATE_PAYMENT_LINK_API_KEY}`,
                 'Content-Type': 'application/json'
             },
             data: data
@@ -41,15 +44,27 @@ const CreatePaymentLink = () => {
         try {
             const response = await axios.request(config);
             setLink(response?.data);
-            console.log(link)
         } catch (error) {
             console.error('Error creating payment link:', error);
         }
     };
 
     return (
-        <div>
-            <button onClick={createLink}>Create Payment Link</button>
+        <div className="flex flex-col items-center justify-center min-h-screen py-2">
+            <button
+                onClick={createLink}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+                Create Payment Link
+            </button>
+
+            {
+                link && (
+                    <pre className="bg-gray-100 p-4 rounded mt-4">
+                        {JSON.stringify(link, null, 2)}
+                    </pre>
+                )
+            }
             <div id='mamo-checkout' data-src={link}></div>
             <script src='https://assets.mamopay.com/public/checkout-inline.min.js'></script>
         </div>

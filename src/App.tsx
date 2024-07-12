@@ -3,8 +3,7 @@ import CreatePaymentLink from "./components/CreatePaymentLink";
 
 function App() {
     return (
-        <div className="App">
-            <h1>MamoPay Payment Link</h1>
+        <div>
             <CreatePaymentLink />
         </div>
     );
