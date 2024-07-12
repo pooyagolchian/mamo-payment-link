@@ -3,9 +3,7 @@ import CreatePaymentLink from "./components/CreatePaymentLink";
 
 function App() {
     return (
-        <div>
             <CreatePaymentLink />
-        </div>
     );
 }
 
