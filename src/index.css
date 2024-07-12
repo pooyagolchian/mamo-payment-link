@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.loader {
+    display: flex;
+    align-items: center;
+}
